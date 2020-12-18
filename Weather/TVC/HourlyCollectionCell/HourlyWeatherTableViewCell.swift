@@ -17,6 +17,7 @@ class HourlyWeatherTableViewCell: UITableViewCell, UICollectionViewDelegate, UIC
         hourlyCollectionView.register(HourlyWeatherCollectionViewCell.nib(), forCellWithReuseIdentifier: HourlyWeatherCollectionViewCell.identifier)
         hourlyCollectionView.delegate = self
         hourlyCollectionView.dataSource = self
+        
         // Initialization code
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,7 +36,7 @@ class HourlyWeatherTableViewCell: UITableViewCell, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 60, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

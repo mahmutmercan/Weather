@@ -35,7 +35,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
         self.lowTempLabel.text = "\(String(temparatureLowResult))°"
         self.highTempLabel.text = "\(String(temparatureHighResult))°"
         self.dayLabel.text = getDayForDate(Date(timeIntervalSince1970: Double(model.time)))
-        self.iconImageView.contentMode = .scaleAspectFit
+        self.iconImageView.contentMode = .scaleAspectFill
         
         let icon = model.icon.lowercased()
         

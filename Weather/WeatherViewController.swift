@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
@@ -46,7 +47,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         dailyWeatherTableView.dataSource = self
         // Do any additional setup after loading the view.
         
-        print(self.current?.icon.lowercased())
+//        print(self.current?.icon.lowercased())
         setupGradient()
     }
  
@@ -60,8 +61,21 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         locationManager.startMonitoringSignificantLocationChanges()
         setupGradient()
     }
+    func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            completion(placemarks?.first?.locality,
+                       placemarks?.first?.country,
+                       error)
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location: CLLocation = manager.location else { return }
+        fetchCityAndCountry(from: location) { city, country, error in
+            guard let city = city, let country = country, error == nil else { return }
+            print(city + ", " + country)
+        }
+
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             locationManager.startUpdatingLocation()
@@ -79,7 +93,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         print("\(lat) | \(long)")
 
         let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/\(lat),\(long)?exclude=[flags,minutely]"
-//        let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/22.8267,-120.4233?exclude=[flags,minutely]"
+//        let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/41.01,29.09?exclude=[flags,minutely]"
 
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
             // Validation
@@ -113,7 +127,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.myWeatherType = result.currently.icon.lowercased()
             //self.setupGradient(weatherType: self.current!.icon.lowercased())
 
-            print(result)
+//            print(result)
             // Update user interface
             DispatchQueue.main.async {
                 self.dailyWeatherTableView.reloadData()
@@ -233,8 +247,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             let temparatureResult = calculateCelsius(fahrenheit: currentWeather.temperature)
             cell.locationLabel.text = "\(String(describing: weatherResponse?.timezone))"
             cell.tempLabel.text = "\(String(temparatureResult))°"
-            cell.summaryLabel.text = "\(String(self.current!.summary))"
-            cell.tempLabel.font = UIFont(name: "Helvetica-Bold", size: 32)
+            cell.summaryLabel.text = "\(String(self.current!.summary))"            
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HourlyWeatherTableViewCell.identifier, for: indexPath) as! HourlyWeatherTableViewCell

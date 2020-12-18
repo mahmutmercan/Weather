@@ -35,7 +35,7 @@ class HeaderWeatherTableViewCell: UITableViewCell {
                  bundle: nil)
     }
     func configure(with model: CurrentWeather) {
-        self.weatherImageView.contentMode = .scaleAspectFit
+        self.weatherImageView.contentMode = .scaleAspectFill
         
         let icon = model.icon.lowercased()
         
