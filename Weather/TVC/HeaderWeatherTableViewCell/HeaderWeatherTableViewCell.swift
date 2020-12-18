@@ -61,10 +61,10 @@ class HeaderWeatherTableViewCell: UITableViewCell {
             self.weatherImageView.image = UIImage(named: "Fast_winds")
             
         }
-//        else if icon.contains("fog"){
-//            self.weatherImageView.image = UIImage(named: "")
-//            
-//        }
+        else if icon.contains("fog"){
+            self.weatherImageView.image = UIImage(named: "fog")
+            
+        }
         else if icon.contains("hail"){
             self.weatherImageView.image = UIImage(named: "Cloud_hailstone")
             

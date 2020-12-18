@@ -17,8 +17,8 @@ class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet var tempLabel: UILabel!
     
     func configure(with model: HourlyWeatherEntry) {
-        self.tempLabel.text = "\(model.temperature)"
-
+        let temparatureResult = calculateCelsius(fahrenheit: model.temperature)
+        self.tempLabel.text = "\(String(temparatureResult))°"
         self.iconImageView.contentMode = .scaleAspectFit
         let icon = model.icon.lowercased()
         
@@ -45,10 +45,10 @@ class HourlyWeatherCollectionViewCell: UICollectionViewCell {
             self.iconImageView.image = UIImage(named: "Fast_winds")
             
         }
-//        else if icon.contains("fog"){
-//            self.iconImageView.image = UIImage(named: "")
-//
-//        }
+        else if icon.contains("fog"){
+            self.iconImageView.image = UIImage(named: "fog")
+
+        }
         else if icon.contains("hail"){
             self.iconImageView.image = UIImage(named: "Cloud_hailstone")
             
@@ -68,4 +68,13 @@ class HourlyWeatherCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    func calculateCelsius(fahrenheit: Double) -> Double {
+        var celsius: Double
+        var roundedCelsius: Double
+
+        celsius = (fahrenheit - 32) / 1.8
+        roundedCelsius = Double(round(10*celsius)/10)
+        return roundedCelsius
+    }
+
 }

@@ -55,7 +55,9 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
         setupGradient()
     }
     
@@ -64,7 +66,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             currentLocation = locations.first
             locationManager.startUpdatingLocation()
             requestWeatherForLocation()
-            
         }
     }
     
@@ -75,9 +76,11 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let long = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
-        
-        
+        print("\(lat) | \(long)")
+
         let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/\(lat),\(long)?exclude=[flags,minutely]"
+//        let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/22.8267,-120.4233?exclude=[flags,minutely]"
+
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
             // Validation
             guard let data = data, error == nil else {
@@ -229,7 +232,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.configure(with: self.current!)
             let temparatureResult = calculateCelsius(fahrenheit: currentWeather.temperature)
             cell.locationLabel.text = "\(String(describing: weatherResponse?.timezone))"
-//            cell.tempLabel.text = "\(currentWeather.temperature)°"
             cell.tempLabel.text = "\(String(temparatureResult))°"
             cell.summaryLabel.text = "\(String(self.current!.summary))"
             cell.tempLabel.font = UIFont(name: "Helvetica-Bold", size: 32)

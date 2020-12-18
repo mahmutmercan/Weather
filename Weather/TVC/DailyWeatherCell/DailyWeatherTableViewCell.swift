@@ -30,8 +30,10 @@ class DailyWeatherTableViewCell: UITableViewCell {
         
         self.highTempLabel.textAlignment = .center
         self.lowTempLabel.textAlignment = .center
-        self.lowTempLabel.text = "\(Int(model.temperatureLow))°"
-        self.highTempLabel.text = "\(Int(model.temperatureHigh))°"
+        let temparatureLowResult = calculateCelsius(fahrenheit: model.temperatureLow)
+        let temparatureHighResult = calculateCelsius(fahrenheit: model.temperatureHigh)
+        self.lowTempLabel.text = "\(String(temparatureLowResult))°"
+        self.highTempLabel.text = "\(String(temparatureHighResult))°"
         self.dayLabel.text = getDayForDate(Date(timeIntervalSince1970: Double(model.time)))
         self.iconImageView.contentMode = .scaleAspectFit
         
@@ -52,7 +54,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
         } else if icon.contains("wind"){
             self.iconImageView.image = UIImage(named: "Fast_winds")
         } else if icon.contains("fog"){
-            self.iconImageView.image = UIImage(named: "slow_winds")
+            self.iconImageView.image = UIImage(named: "fog")
         } else if icon.contains("hail"){
             self.iconImageView.image = UIImage(named: "Cloud_hailstone")
         } else if icon.contains("cloudy"){
@@ -71,4 +73,13 @@ class DailyWeatherTableViewCell: UITableViewCell {
         formatter.dateFormat = "EEEE" // Monday
         return formatter.string(from: inputDate)
     }
+    func calculateCelsius(fahrenheit: Double) -> Double {
+        var celsius: Double
+        var roundedCelsius: Double
+
+        celsius = (fahrenheit - 32) / 1.8
+        roundedCelsius = Double(round(10*celsius)/10)
+        return roundedCelsius
+    }
+
 }
