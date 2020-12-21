@@ -128,9 +128,9 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         let key = "ddcc4ebb2a7c9930b90d9e59bda0ba7a"
         print("\(lat) | \(long)")
 
-//        let url = "https://api.darksky.net/forecast/\(key)/\(lat),\(long)?exclude=[flags,minutely]"
-        
-        let url = "https://api.darksky.net/forecast/\(key)/37.00,-122?exclude=[flags,minutely]"
+        let url = "https://api.darksky.net/forecast/\(key)/\(lat),\(long)?exclude=[flags,minutely]"
+//        let url = "https://api.darksky.net/forecast/\(key)/37.00,-122?exclude=[flags,minutely]"
+
 
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
             // Validation
@@ -201,8 +201,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         } else if myWeatherType == "clear-night" {
             gradientStartColor = UIColor.init(rgb: 0x8e9eab).cgColor
-            gradientEndColor = UIColor.init(rgb: 0xeef2f3).cgColor
-            
+            gradientEndColor = UIColor.init(rgb: 0xc4cccf).cgColor
         } else if myWeatherType == "clear" {
             gradientStartColor = UIColor.init(rgb: 0x0082c8).cgColor
             gradientEndColor = UIColor.init(rgb: 0x0082c8).cgColor
