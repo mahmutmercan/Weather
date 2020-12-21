@@ -23,16 +23,11 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     var weatherResponse: WeatherResponse?
     var timeZone: String!
     var myWeatherType: String?
-    
     var currentCity: String?
-    
     private let refreshControl = UIRefreshControl()
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTableView()
         // Do any additional setup after loading the view.
     }
@@ -58,18 +53,14 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         dailyWeatherTableView.dataSource = self
         // Do any additional setup after loading the view.
         
-//        print(self.current?.icon.lowercased())
         setupGradient()
-        
         // Add Refresh Control to Table View
         if #available(iOS 10.0, *) {
             dailyWeatherTableView.refreshControl = refreshControl
         } else {
             dailyWeatherTableView.addSubview(refreshControl)
         }
-                
         configureRefreshControl()
-        
     }
     
     @objc private func refreshWeatherData(_ sender: Any) {
@@ -91,16 +82,11 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         dailyWeatherTableView.refreshControl?.addTarget(self, action:
                                           #selector(refreshWeatherData),
                                           for: .valueChanged)
-        
         refreshControl.tintColor = UIColor.init(rgb: 0xffffff)
-        
-        
-        
     }
  
     //Location
     func setupLocation() {
-
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -139,10 +125,12 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let long = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
+        let key = "ddcc4ebb2a7c9930b90d9e59bda0ba7a"
         print("\(lat) | \(long)")
 
-        let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/\(lat),\(long)?exclude=[flags,minutely]"
-//        let url = "https://api.darksky.net/forecast/ddcc4ebb2a7c9930b90d9e59bda0ba7a/41.01,29.09?exclude=[flags,minutely]"
+//        let url = "https://api.darksky.net/forecast/\(key)/\(lat),\(long)?exclude=[flags,minutely]"
+        
+        let url = "https://api.darksky.net/forecast/\(key)/37.00,-122?exclude=[flags,minutely]"
 
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
             // Validation
@@ -155,8 +143,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             do {
                 json = try JSONDecoder().decode(WeatherResponse.self, from: data)
                 self.weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
-     //           print(json)
-                
             }
             catch {
                 print("error: \(error)")
@@ -174,27 +160,21 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.models2 = result.hourly.data
             self.timeZone = result.timezone
             self.myWeatherType = result.currently.icon.lowercased()
-            //self.setupGradient(weatherType: self.current!.icon.lowercased())
-
-//            print(result)
             // Update user interface
             DispatchQueue.main.async {
                 self.dailyWeatherTableView.reloadData()
                 self.setupGradient()
             }
-            
         }).resume()
     }
     func calculateCelsius(fahrenheit: Double) -> Double {
         var celsius: Double
         var roundedCelsius: Double
-
         celsius = (fahrenheit - 32) / 1.8
         roundedCelsius = Double(round(10*celsius)/10)
         return roundedCelsius
     }
 
-    
     func getDayForTime(_ date: Date?) -> String {
         guard let inputDate = date else {
             return ""
@@ -203,7 +183,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         formatter.dateFormat = "HH:mm" // Monday
         return formatter.string(from: inputDate)
     }
-    
     
     private func setupGradient(){
         gradient?.removeFromSuperlayer()
@@ -256,10 +235,10 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             gradientStartColor = UIColor.init(rgb: 0x83a4d4).cgColor
             gradientEndColor = UIColor.init(rgb: 0x5a9396).cgColor
             
-        }else if myWeatherType == "partly-cloudy" || myWeatherType == "mostly-cloudy"{
+        } else if myWeatherType == "partly-cloudy" || myWeatherType == "mostly-cloudy"{
             gradientStartColor = UIColor.init(rgb: 0x2c5383).cgColor
             gradientEndColor = UIColor.init(rgb: 0x5fafc9).cgColor
-        }else {
+        } else {
             gradientStartColor = UIColor.init(rgb: 0x56ab2f).cgColor
             gradientEndColor = UIColor.init(rgb: 0x56ab2f).cgColor
         }
@@ -270,8 +249,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         gradient.startPoint = CGPoint(x: 0, y: 0)
         self.view.layer.insertSublayer(gradient, at: 0)
     }
-    
-    
     //Table
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -296,7 +273,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.backgroundColor = .clear
             cell.configure(with: self.current!)
             let temparatureResult = calculateCelsius(fahrenheit: currentWeather.temperature)
-
             let locationLabelList = weatherResponse?.timezone.components(separatedBy: "/")
             let currentlocationLabel = locationLabelList?[1]
             let modifiedLabel = currentlocationLabel?.replace(target: "_", withString: " ")

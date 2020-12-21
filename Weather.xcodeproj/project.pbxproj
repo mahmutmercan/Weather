@@ -12,9 +12,6 @@
 		8500BDE525763E530099C467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8500BDE325763E530099C467 /* Main.storyboard */; };
 		8500BDE725763E540099C467 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8500BDE625763E540099C467 /* Assets.xcassets */; };
 		8500BDEA25763E540099C467 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8500BDE825763E540099C467 /* LaunchScreen.storyboard */; };
-		8500BDF3257642210099C467 /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500BDF2257642210099C467 /* RegionViewController.swift */; };
-		8500BDF6257642380099C467 /* RadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500BDF5257642380099C467 /* RadarViewController.swift */; };
-		8500BDF9257642470099C467 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500BDF8257642470099C467 /* SettingsViewController.swift */; };
 		8500BDFC257642760099C467 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500BDFB257642760099C467 /* WeatherViewController.swift */; };
 		8500BE0525765C6E0099C467 /* DailyWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500BE0325765C6E0099C467 /* DailyWeatherTableViewCell.swift */; };
 		8500BE0625765C6E0099C467 /* DailyWeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8500BE0425765C6E0099C467 /* DailyWeatherTableViewCell.xib */; };
@@ -35,9 +32,6 @@
 		8500BDE625763E540099C467 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8500BDE925763E540099C467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8500BDEB25763E540099C467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8500BDF2257642210099C467 /* RegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewController.swift; sourceTree = "<group>"; };
-		8500BDF5257642380099C467 /* RadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarViewController.swift; sourceTree = "<group>"; };
-		8500BDF8257642470099C467 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8500BDFB257642760099C467 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		8500BE0325765C6E0099C467 /* DailyWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherTableViewCell.swift; sourceTree = "<group>"; };
 		8500BE0425765C6E0099C467 /* DailyWeatherTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherTableViewCell.xib; sourceTree = "<group>"; };
@@ -83,9 +77,6 @@
 				8500BDDD25763E530099C467 /* AppDelegate.swift */,
 				8500BDDF25763E530099C467 /* SceneDelegate.swift */,
 				8500BDFB257642760099C467 /* WeatherViewController.swift */,
-				8500BDF2257642210099C467 /* RegionViewController.swift */,
-				8500BDF5257642380099C467 /* RadarViewController.swift */,
-				8500BDF8257642470099C467 /* SettingsViewController.swift */,
 				8500BDE325763E530099C467 /* Main.storyboard */,
 				8500BDE625763E540099C467 /* Assets.xcassets */,
 				8500BDE825763E540099C467 /* LaunchScreen.storyboard */,
@@ -218,16 +209,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				85B9B08F2578D93500549092 /* HourlyWeatherCollectionViewCell.swift in Sources */,
-				8500BDF3257642210099C467 /* RegionViewController.swift in Sources */,
 				8500BDDE25763E530099C467 /* AppDelegate.swift in Sources */,
 				8500BE0B25765CBC0099C467 /* HourlyWeatherTableViewCell.swift in Sources */,
 				85AA7854257A3F140063C28D /* HeaderWeatherTableViewCell.swift in Sources */,
-				8500BDF6257642380099C467 /* RadarViewController.swift in Sources */,
 				8500BDFC257642760099C467 /* WeatherViewController.swift in Sources */,
 				8500BDE025763E530099C467 /* SceneDelegate.swift in Sources */,
 				8500BE0525765C6E0099C467 /* DailyWeatherTableViewCell.swift in Sources */,
 				8592501D2588DB4F00B23043 /* Extensions.swift in Sources */,
-				8500BDF9257642470099C467 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,168 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PRD-wi-iCz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aen-7h-4lF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Region-->
-        <scene sceneID="sNI-Z9-zYT">
+        <!--Weather View Controller-->
+        <scene sceneID="UtR-2G-QhV">
             <objects>
-                <viewController id="duw-iY-GCS" customClass="RegionViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="H0V-9a-hRR">
+                <viewController id="Aen-7h-4lF" customClass="WeatherViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lhU-xX-obb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bS-hj-Y0T">
-                                <rect key="frame" x="16" y="44" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="8hJ-cE-S10"/>
-                                    <constraint firstAttribute="height" constant="50" id="d18-lZ-Xbc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eex-d8-efk">
-                                <rect key="frame" x="348" y="44" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="7rc-xn-pTr"/>
-                                    <constraint firstAttribute="height" constant="50" id="eoc-yi-1ie"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Edit"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzV-f7-KE3">
-                                <rect key="frame" x="16" y="102" width="382" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="R6w-r6-vkr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iNz-gb-DEp">
-                                <rect key="frame" x="0.0" y="162" width="414" height="651"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0xL-3N-Ror"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="3bS-hj-Y0T" firstAttribute="top" secondItem="0xL-3N-Ror" secondAttribute="top" id="0pa-Jt-5RQ"/>
-                            <constraint firstItem="FzV-f7-KE3" firstAttribute="top" secondItem="3bS-hj-Y0T" secondAttribute="bottom" constant="8" id="1al-Sl-bkz"/>
-                            <constraint firstItem="0xL-3N-Ror" firstAttribute="bottom" secondItem="iNz-gb-DEp" secondAttribute="bottom" id="2Q6-FF-vyX"/>
-                            <constraint firstItem="0xL-3N-Ror" firstAttribute="trailing" secondItem="FzV-f7-KE3" secondAttribute="trailing" constant="16" id="BX8-sI-uBB"/>
-                            <constraint firstItem="0xL-3N-Ror" firstAttribute="trailing" secondItem="eex-d8-efk" secondAttribute="trailing" constant="16" id="GzB-86-aNE"/>
-                            <constraint firstItem="iNz-gb-DEp" firstAttribute="top" secondItem="FzV-f7-KE3" secondAttribute="bottom" id="Ric-W5-ouz"/>
-                            <constraint firstItem="eex-d8-efk" firstAttribute="top" secondItem="0xL-3N-Ror" secondAttribute="top" id="cSQ-Ze-Y3A"/>
-                            <constraint firstItem="0xL-3N-Ror" firstAttribute="trailing" secondItem="iNz-gb-DEp" secondAttribute="trailing" id="hNU-eb-PPx"/>
-                            <constraint firstItem="3bS-hj-Y0T" firstAttribute="leading" secondItem="0xL-3N-Ror" secondAttribute="leading" constant="16" id="ut5-La-7CR"/>
-                            <constraint firstItem="iNz-gb-DEp" firstAttribute="leading" secondItem="0xL-3N-Ror" secondAttribute="leading" id="x7W-h2-LZf"/>
-                            <constraint firstItem="FzV-f7-KE3" firstAttribute="leading" secondItem="0xL-3N-Ror" secondAttribute="leading" constant="16" id="xSK-ue-hiN"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Region" image="network" catalog="system" id="qf5-0S-xRa"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zFB-jh-Nf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1835" y="419"/>
-        </scene>
-        <!--Radar-->
-        <scene sceneID="hEZ-NR-XVQ">
-            <objects>
-                <viewController id="3TG-cP-Kxg" customClass="RadarViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hDY-YT-9EA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="i0V-vu-xDB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Radar" image="antenna.radiowaves.left.and.right" catalog="system" id="c94-BU-s2Q"/>
-                    <navigationItem key="navigationItem" id="58N-PU-5KM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hDK-Lh-BY1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1832" y="1059"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="2Mi-mb-Nas">
-            <objects>
-                <viewController id="3ZV-ru-t9d" customClass="SettingsViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6zA-t2-wxi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="2cA-Ki-x4A"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" id="9sh-WC-fJN"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Llo-XV-aYF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1835" y="1747"/>
-        </scene>
-        <!--Weather-->
-        <scene sceneID="COa-x6-ZYP">
-            <objects>
-                <viewController id="QXE-yJ-ppI" customClass="WeatherViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Lif-wD-d9A">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FEw-ev-1Mh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rh4-hu-ix8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.6472367644" green="0.81702846289999997" blue="0.98041492699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="wDS-eA-v1j"/>
+                        <viewLayoutGuide key="safeArea" id="8Sm-Na-XIf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FEw-ev-1Mh" firstAttribute="bottom" secondItem="wDS-eA-v1j" secondAttribute="bottom" id="7Nx-UC-Tz6"/>
-                            <constraint firstItem="FEw-ev-1Mh" firstAttribute="trailing" secondItem="wDS-eA-v1j" secondAttribute="trailing" id="YSe-1V-Z56"/>
-                            <constraint firstItem="FEw-ev-1Mh" firstAttribute="leading" secondItem="wDS-eA-v1j" secondAttribute="leading" id="ZtT-Nj-fpQ"/>
-                            <constraint firstItem="FEw-ev-1Mh" firstAttribute="top" secondItem="wDS-eA-v1j" secondAttribute="top" id="uBW-dw-Wi9"/>
+                            <constraint firstItem="8Sm-Na-XIf" firstAttribute="trailing" secondItem="rh4-hu-ix8" secondAttribute="trailing" id="Ccu-Sm-jLb"/>
+                            <constraint firstItem="rh4-hu-ix8" firstAttribute="leading" secondItem="lhU-xX-obb" secondAttribute="leading" id="ewr-oD-C2t"/>
+                            <constraint firstItem="rh4-hu-ix8" firstAttribute="top" secondItem="8Sm-Na-XIf" secondAttribute="top" id="qmT-We-HDD"/>
+                            <constraint firstItem="8Sm-Na-XIf" firstAttribute="bottom" secondItem="rh4-hu-ix8" secondAttribute="bottom" id="tuR-wS-YMy"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather" image="thermometer" catalog="system" id="q4d-fp-lvl"/>
                     <connections>
-                        <outlet property="dailyWeatherTableView" destination="FEw-ev-1Mh" id="EGN-8U-m7i"/>
+                        <outlet property="dailyWeatherTableView" destination="rh4-hu-ix8" id="udD-jH-YEu"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MRy-Jm-Tvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yzy-my-bib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831.8840579710147" y="-215.625"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="kuq-PI-wMJ">
-            <objects>
-                <tabBarController id="PRD-wi-iCz" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sq6-xF-lfP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="QXE-yJ-ppI" kind="relationship" relationship="viewControllers" id="njS-o4-mLR"/>
-                        <segue destination="duw-iY-GCS" kind="relationship" relationship="viewControllers" id="ZPR-qJ-W3s"/>
-                        <segue destination="3TG-cP-Kxg" kind="relationship" relationship="viewControllers" id="5cp-hn-TVm"/>
-                        <segue destination="3ZV-ru-t9d" kind="relationship" relationship="viewControllers" id="Xo9-8u-B3b"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W9g-uV-bvp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="939" y="88"/>
+            <point key="canvasLocation" x="3980" y="-189"/>
         </scene>
     </scenes>
     <resources>
-        <image name="antenna.radiowaves.left.and.right" catalog="system" width="128" height="109"/>
-        <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="network" catalog="system" width="128" height="121"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="thermometer" catalog="system" width="93" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
