@@ -24,6 +24,12 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     var timeZone: String!
     var myWeatherType: String?
     
+    var currentCity: String?
+    
+    private let refreshControl = UIRefreshControl()
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +38,11 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setupLocation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupLocation()
     }
     
@@ -49,6 +60,42 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
 //        print(self.current?.icon.lowercased())
         setupGradient()
+        
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            dailyWeatherTableView.refreshControl = refreshControl
+        } else {
+            dailyWeatherTableView.addSubview(refreshControl)
+        }
+                
+        configureRefreshControl()
+        
+    }
+    
+    @objc private func refreshWeatherData(_ sender: Any) {
+        // Fetch Weather Data
+        fetchWeatherData()
+    }
+    
+    private func fetchWeatherData() {
+        dailyWeatherTableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.dailyWeatherTableView.refreshControl?.endRefreshing()
+         }
+    }
+    
+    func configureRefreshControl () {
+       // Add the refresh control to your UIScrollView object.
+        dailyWeatherTableView.refreshControl = UIRefreshControl()
+        dailyWeatherTableView.refreshControl?.addTarget(self, action:
+                                          #selector(refreshWeatherData),
+                                          for: .valueChanged)
+        
+        refreshControl.tintColor = UIColor.init(rgb: 0xffffff)
+        
+        
+        
     }
  
     //Location
@@ -74,6 +121,8 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         fetchCityAndCountry(from: location) { city, country, error in
             guard let city = city, let country = country, error == nil else { return }
             print(city + ", " + country)
+            self.currentCity = city
+            
         }
 
         if !locations.isEmpty, currentLocation == nil {
@@ -162,7 +211,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         var gradientStartColor = UIColor(red: 0/255.0, green: 242/255.0, blue: 96/255.0, alpha: 1.0).cgColor
         var gradientMidColor = UIColor(red: 0/255.0, green: 242/255.0, blue: 96/255.0, alpha: 1.0).cgColor
         var gradientEndColor = UIColor(red: 5/255.0, green: 117/255.0, blue: 230/255.0, alpha: 1.0).cgColor
-        
         if myWeatherType == "clear-day" {
             gradientStartColor = UIColor.init(rgb: 0x2980b9).cgColor
             gradientMidColor = UIColor.init(rgb: 0x6dd5fa).cgColor
@@ -204,10 +252,13 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             gradientStartColor = UIColor.init(rgb: 0xece9e6).cgColor
             gradientEndColor = UIColor.init(rgb: 0xffffff).cgColor
             
-        } else if myWeatherType == "party-cloudly-night" {
+        } else if myWeatherType == "partly-cloudy-night" {
             gradientStartColor = UIColor.init(rgb: 0x83a4d4).cgColor
             gradientEndColor = UIColor.init(rgb: 0x5a9396).cgColor
             
+        }else if myWeatherType == "partly-cloudy" || myWeatherType == "mostly-cloudy"{
+            gradientStartColor = UIColor.init(rgb: 0x2c5383).cgColor
+            gradientEndColor = UIColor.init(rgb: 0x5fafc9).cgColor
         }else {
             gradientStartColor = UIColor.init(rgb: 0x56ab2f).cgColor
             gradientEndColor = UIColor.init(rgb: 0x56ab2f).cgColor
@@ -241,13 +292,23 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HeaderWeatherTableViewCell.identifier, for: indexPath) as! HeaderWeatherTableViewCell
-            
+            print(self.currentCity ?? "")
             cell.backgroundColor = .clear
             cell.configure(with: self.current!)
             let temparatureResult = calculateCelsius(fahrenheit: currentWeather.temperature)
-            cell.locationLabel.text = "\(String(describing: weatherResponse?.timezone))"
+
+            let locationLabelList = weatherResponse?.timezone.components(separatedBy: "/")
+            let currentlocationLabel = locationLabelList?[1]
+            let modifiedLabel = currentlocationLabel?.replace(target: "_", withString: " ")
+            print(modifiedLabel ?? "")
+            cell.locationLabel.text = String(modifiedLabel ?? "Your Location")
             cell.tempLabel.text = "\(String(temparatureResult))°"
-            cell.summaryLabel.text = "\(String(self.current!.summary))"            
+            cell.summaryLabel.text = "\(String(self.current!.summary))"
+            
+            if self.currentCity != nil{
+                cell.locationLabel.text = String(self.currentCity ?? "Your Location")
+            }
+            
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HourlyWeatherTableViewCell.identifier, for: indexPath) as! HourlyWeatherTableViewCell
@@ -264,9 +325,9 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 300
+            return 256
         } else if indexPath.section == 1 {
-            return 100
+            return 96
         } else {
             return 60
         }
